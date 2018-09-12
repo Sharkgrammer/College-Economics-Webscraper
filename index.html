@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		
+  </head>
+
+  <body class='bg'>
+  
+	<div class="container-fluid">
+		<div class="row">
+		<div class="col-sm-2">
+		</div>
+		<div class="col-sm-3">
+			<p id="stock_date"/> 
+		</div>
+		<div class="col-sm-3">
+			<p id="stock_price"/> 
+		</div>      
+		<div class="col-sm-3">
+			<p id="stock_market"/> 
+		</div>      
+		<div class="col-sm-1">
+		</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row">
+		<div class="col-sm-2">
+		</div>
+		<div class="col-sm-3">
+			<p id="news_date"/> 
+		</div>
+		<div class="col-sm-6">
+			<p id="news_data"/> 
+		</div>      
+		<div class="col-sm-1">
+		</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var stocks, news, i;
+		
+		jQuery.ajax({
+			type: "POST",
+			url: 'http://pokergamelabs.gearhostpreview.com/pyplace/dbwork.php',
+			dataType: 'json',
+			data: {functionname: 'stocks', arguments: [0]},
+
+			success: function (obj, textstatus) {
+						stocks = obj.result;
+						//document.getElementById('stock_date').innerHTML = stocks;
+						for (i = 0; i < stocks.split(";").length - 1; i++) { 
+							document.getElementById('stock_date').innerHTML += stocks.split(";")[i].split("---")[0] + "</br>";
+							document.getElementById('stock_price').innerHTML += stocks.split(";")[i].split("---")[1] + "</br>";
+							document.getElementById('stock_market').innerHTML += stocks.split(";")[i].split("---")[2] + "</br>";
+						}				
+					}
+				});
+					
+		jQuery.ajax({
+			type: "POST",
+			url: 'http://pokergamelabs.gearhostpreview.com/pyplace/dbwork.php',
+			dataType: 'json',
+			data: {functionname: 'news', arguments: [0]},
+
+			success: function (obj, textstatus) {
+						news = obj.result;
+						//document.getElementById('news_date').innerHTML = news;
+						for (i = 0; i < news.split(";").length - 1; i++) {
+							document.getElementById('news_date').innerHTML += news.split(";")[i].split("---")[0] + "</br>";
+							document.getElementById('news_data').innerHTML += "<a href=" + news.split(";")[i].split("---")[2] + ">" + news.split(";")[i].split("---")[1] + "</a></br>";
+						}
+					}
+				});
+	</script>
+  
+  </body>
+
+</html>
