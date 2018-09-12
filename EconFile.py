@@ -21,7 +21,7 @@ class Render(QWebPage):
     self.frame = self.mainFrame()  
     self.app.quit() 
 
-weburl = "http://pokergamelabs.gearhostpreview.com/pyplace/EconFile.php?"
+weburl = "whatever.com/pyplace/EconFile.php?"
 page = requests.get('http://www.ise.ie/Market-Data-Announcements/Companies/Equity-History/?equity=2015120')
 tree = html.fromstring(page.content)
 url = 'https://www.londonstockexchange.com/exchange/prices-and-markets/stocks/exchange-insight/company-news.html?fourWayKey=IE0003290289IEEURSSQ3'  
