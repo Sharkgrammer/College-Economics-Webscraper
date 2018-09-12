@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("den1.mysql2.gear.host","econsave","Qh7CDqjHd!-a", "econsave");
+$con = mysqli_connect("den1.mysql2.gear.host","econsave","", "econsave");
 if (mysqli_connect_errno($con)) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
