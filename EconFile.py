@@ -74,9 +74,11 @@ for x in range(0, len(newsDataGoogle)):
     date = ""
     workingStr = str(tostring(newsDataGoogle[x]))
     for y in range(1, len(workingStr.split(">"))):
-        tempStr += workingStr.split(">")[y].replace("<b", "").replace("</b", "").replace("</a", "").replace("\\", "").replace("...", "").replace("'", "")
+        tempStr += workingStr.split(">")[y].replace("<b", "").replace("</b", "").replace("</a", "").replace("\\", "").replace("...", "").replace("'", "").replace("&#", "").replace(";", "")
     if (newsDateGoogle[x].split("- ")[1].find("day")):
         date = str((datetime.datetime.now() - datetime.timedelta(days=(int(newsDateGoogle[x].split("- ")[1].split(" ")[0])))).date())
+    else:
+        date = newsDateGoogle[x].split("- ")[1]
     post_fields = {'type': 1, 'l': newsDataGoogle[x].get("href").replace("/url?q=", "").split("&sa=")[0], 'd': date, 'n': tempStr}
     request = Request(weburl, urlencode(post_fields).encode())
     content2 = urlopen(request).read().decode()
