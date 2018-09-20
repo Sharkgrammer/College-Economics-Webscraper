@@ -16,7 +16,7 @@ if (mysqli_connect_errno($con)) {
     if( !isset($aResult['error']) ) {
         switch($_POST['functionname']) {
             case 'stocks':
-				$query2 = "select * from stock;";
+				$query2 = "select * from stock ORDER BY share_date DESC;";
 				$result2 = mysqli_query($con, $query2) or die(mysqli_error($con));
 				if(!$result2)
 				{
@@ -28,7 +28,8 @@ if (mysqli_connect_errno($con)) {
 					{
 						while($row = mysqli_fetch_assoc($result2))
 						{
-							$var .= $row['share_date'];
+							$dateObject = DateTime::createFromFormat("Y-m-d", $row['share_date']);
+							$var .= $dateObject->format('d/m/Y');
 							$var .=  "---";
 							$var .=  $row['share_price'];
 							$var .=  "---";
@@ -41,7 +42,7 @@ if (mysqli_connect_errno($con)) {
 				break;
 			   
 			case 'news':
-				$query2 = "select * from news;";
+				$query2 = "select * from news ORDER BY news_date DESC;";
 				$result2 = mysqli_query($con, $query2) or die(mysqli_error($con));
 				if(!$result2)
 				{
@@ -53,7 +54,8 @@ if (mysqli_connect_errno($con)) {
 					{
 						while($row = mysqli_fetch_assoc($result2))
 						{
-							$var .=  $row['news_date'];
+							$dateObject = DateTime::createFromFormat("Y-m-d", $row['news_date']);
+							$var .= $dateObject->format('d/m/Y');
 							$var .=  "---";
 							$var .=  $row['news_name'];
 							$var .=  "---";

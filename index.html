@@ -48,8 +48,16 @@
 	</div>
 	
 	<script type="text/javascript">
-		var stocks, news, i;
+	
+		///*
+		document.getElementById('stock_date').innerHTML += "<b>DATE</b> </br>";
+		document.getElementById('stock_price').innerHTML += "<b>STOCK PRICE</b> </br>";
+		document.getElementById('stock_market').innerHTML += "<b>MARKET PRICE</b> </br>";
+		document.getElementById('news_date').innerHTML += "<b>DATE</b> </br>";
+		document.getElementById('news_data').innerHTML += "<b>ARTICLE</b> </br>";
+		//*/
 		
+		var stocks, news, i;
 		jQuery.ajax({
 			type: "POST",
 			url: 'http://pokergamelabs.gearhostpreview.com/pyplace/dbwork.php',
@@ -59,7 +67,7 @@
 			success: function (obj, textstatus) {
 						stocks = obj.result;
 						//document.getElementById('stock_date').innerHTML = stocks;
-						for (i = 0; i < stocks.split(";").length - 1; i++) { 
+						for (i = 0; i < stocks.split(";").length - 1; i++) {
 							document.getElementById('stock_date').innerHTML += stocks.split(";")[i].split("---")[0] + "</br>";
 							document.getElementById('stock_price').innerHTML += stocks.split(";")[i].split("---")[1] + "</br>";
 							document.getElementById('stock_market').innerHTML += stocks.split(";")[i].split("---")[2] + "</br>";
